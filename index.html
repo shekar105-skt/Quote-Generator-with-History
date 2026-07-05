@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Generate random inspirational quotes and save your quote history. A beautiful, modern quote generator application." />
+  <title>Quote Generator with History</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Animated background orbs -->
+  <div class="bg-orb bg-orb--1" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb--2" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb--3" aria-hidden="true"></div>
+
+  <div class="app-container">
+    <!-- ====== Header ====== -->
+    <header class="header" id="app-header">
+      <div class="header__icon" aria-hidden="true">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/>
+          <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/>
+        </svg>
+      </div>
+      <h1 class="header__title">Quote Generator</h1>
+      <p class="header__subtitle">Discover wisdom, one quote at a time</p>
+    </header>
+
+    <!-- ====== Hero / Generate ====== -->
+    <section class="hero" id="hero-section">
+      <button class="btn-generate" id="btn-generate" type="button">
+        <span class="btn-generate__icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+          </svg>
+        </span>
+        <span class="btn-generate__text">Generate Quote</span>
+        <span class="btn-generate__loader" aria-hidden="true"></span>
+      </button>
+    </section>
+
+    <!-- ====== Current Quote Display ====== -->
+    <section class="current-quote" id="current-quote" aria-live="polite" hidden>
+      <div class="current-quote__card glass-card">
+        <div class="current-quote__mark" aria-hidden="true">&ldquo;</div>
+        <blockquote class="current-quote__text" id="current-quote-text"></blockquote>
+        <cite class="current-quote__author" id="current-quote-author"></cite>
+      </div>
+    </section>
+
+    <!-- ====== Error Toast ====== -->
+    <div class="toast" id="error-toast" role="alert" hidden>
+      <svg class="toast__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      <span class="toast__message" id="error-toast-message"></span>
+    </div>
+
+    <!-- ====== Quote History ====== -->
+    <section class="history" id="history-section">
+      <div class="history__header">
+        <h2 class="history__title">
+          <svg class="history__title-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          Quote History
+        </h2>
+        <span class="history__count" id="history-count">0 quotes</span>
+      </div>
+
+      <!-- Loading skeleton -->
+      <div class="history__loading" id="history-loading">
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+      </div>
+
+      <!-- Empty state -->
+      <div class="history__empty" id="history-empty" hidden>
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.4">
+          <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+        </svg>
+        <p>No quotes yet. Click <strong>Generate Quote</strong> to get started!</p>
+      </div>
+
+      <!-- Quote list -->
+      <ul class="history__list" id="history-list" aria-label="Quote history"></ul>
+    </section>
+
+    <!-- ====== Footer ====== -->
+    <footer class="footer">
+      <p>Powered by <a href="https://zenquotes.io/" target="_blank" rel="noopener noreferrer">ZenQuotes API</a></p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
